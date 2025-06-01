@@ -21,25 +21,37 @@
       const userInput = document.getElementById('userInput').value;
       document.getElementById('chat').innerText += "👤: " + userInput + "\n";
 
-      const response = await fetch("https://api.openai.com/v1/chat/completions", {
-        method: "POST",
-        headers: {
-          "Authorization": "Bearer YOUR_API_KEY_HERE",
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          model: "gpt-4",
-          messages: [
-            { role: "system", content: "당신은 10년 경력의 피트니스 코치입니다. 사용자의 고민을 듣고 실질적인 피드백을 주세요." },
-            { role: "user", content: userInput }
-          ]
-        })
-      });
+      try {
+        const response = await fetch("https://api.openai.com/v1/chat/completions", {
+          method: "POST",
+          headers: {
+            "Authorization": "Bearer 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",
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            model: "gpt-3.5-turbo",
+            messages: [
+              { role: "system", content: "당신은 10년 경력의 피트니스 코치입니다. 사용자의 고민을 듣고 실질적인 피드백을 주세요." },
+              { role: "user", content: userInput }
+            ]
+          })
+        });
 
-      const data = await response.json();
-      const answer = data.choices[0].message.content;
-      document.getElementById('chat').innerText += "🤖: " + answer + "\n\n";
-      document.getElementById('userInput').value = "";
+        const data = await response.json();
+        console.log("📦 GPT 응답:", data);
+
+        if (!data.choices || !data.choices[0]) {
+          throw new Error("GPT 응답이 비어있거나 예상과 다릅니다.");
+        }
+
+        const answer = data.choices[0].message.content;
+        document.getElementById('chat').innerText += "🤖: " + answer + "\n\n";
+        document.getElementById('userInput').value = "";
+
+      } catch (error) {
+        console.error("❌ 오류:", error);
+        document.getElementById('chat').innerText += "❌ 오류 발생: " + (error.message || "알 수 없는 오류") + "\n\n";
+      }
     }
   </script>
 

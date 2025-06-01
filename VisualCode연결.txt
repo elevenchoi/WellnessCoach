@@ -1,0 +1,35 @@
+git init
+git add .
+git commit -m "GPT 챗봇 초기 커밋"
+git remote add origin https://github.com/elevenchoi/https://github.com/elevenchoi/WellnessCoach.git
+git push -u origin main
+
+
+
+git config --global user.name "elevenchoi"
+git config --global user.email "elevenchoi@gmail.com"
+rm -rf .git
+git init
+git add 
+
+git commit -m "GPT 챗봇 초기 업로드"
+git branch -M main
+
+git remote add origin https://github.com/elevenchoi/WellnessCoach.git
+
+git push -u origin main
+---------------------------------------------------------------------------
+
+
+
+git config --global user.name "elevenchoi"
+git config --global user.email "elevenchoi@gmail.com"
+
+Remove-Item -Recurse -Force .git
+
+git init
+git add .
+git commit -m "GPT 챗봇 초기 업로드"
+git branch -M main
+git remote add origin https://github.com/elevenchoi/WellnessCoach.git
+git push -u origin main
